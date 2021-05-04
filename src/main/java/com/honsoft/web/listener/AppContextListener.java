@@ -15,7 +15,12 @@ import com.honsoft.web.db.DBConnectionManager;
 @WebListener
 public class AppContextListener implements ServletContextListener {
 
+	public AppContextListener() {
+		System.out.println("AppContextListener is being instantiated.");
+	}
+	
     public void contextInitialized(ServletContextEvent servletContextEvent) {
+    	System.out.println("AppContextListener is called. (ServletContext created)");
     	ServletContext ctx = servletContextEvent.getServletContext();
     	
     	String url = ctx.getInitParameter("DBURL");
@@ -44,7 +49,8 @@ public class AppContextListener implements ServletContextListener {
     		//System.out.println("==> "+);
 			System.out.println("name: " + filterName + " , class: " +  filterRegistrations.get(filterName).getClassName() + " , mapping: " + filterRegistrations.get(filterName).getUrlPatternMappings() + filterRegistrations.get(filterName).getServletNameMappings());
     	}
-    	System.out.println("--------------------------------------------------------------");
+    	System.out.println("------------------------------------------");
+    	System.out.println("--------- End of contextInitialized ---------------------------------");
     	
     }
 
