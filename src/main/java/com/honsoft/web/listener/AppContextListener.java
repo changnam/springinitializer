@@ -30,7 +30,7 @@ public class AppContextListener implements ServletContextListener {
     	//create database connection from init parameters and set it to context
     	DBConnectionManager dbManager = new DBConnectionManager(url, u, p);
     	ctx.setAttribute("DBManager", dbManager);
-    	System.out.println("Database connection initialized for Application.");
+    	System.out.println("Database connection initialized for Application. in AppContextListener");
     	
     	Map<String, ? extends ServletRegistration> servletRegistrations = ctx.getServletRegistrations();
 		
@@ -50,7 +50,7 @@ public class AppContextListener implements ServletContextListener {
 			System.out.println("name: " + filterName + " , class: " +  filterRegistrations.get(filterName).getClassName() + " , mapping: " + filterRegistrations.get(filterName).getUrlPatternMappings() + filterRegistrations.get(filterName).getServletNameMappings());
     	}
     	System.out.println("------------------------------------------");
-    	System.out.println("--------- End of contextInitialized ---------------------------------");
+    	System.out.println("--------- End of contextInitialized in AppContextListener ---------------------------------");
     	
     }
 
