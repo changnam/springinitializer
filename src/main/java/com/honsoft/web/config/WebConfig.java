@@ -20,6 +20,6 @@ public class WebConfig {
 	
 	@Bean
 	  public InternalResourceViewResolver internalResourceViewResolver() {
-	    return new InternalResourceViewResolver("/jsp/", ".jsp");
+	    return new InternalResourceViewResolver("/WEB-INF/jsp/", ".jsp");
 	  }
 }
