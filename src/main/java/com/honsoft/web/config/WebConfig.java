@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
@@ -22,16 +23,15 @@ public class WebConfig implements WebMvcConfigurer {
 		return new HelloController();
 	}
 
-	@Bean
-	public InternalResourceViewResolver internalResourceViewResolver() {
-		return new InternalResourceViewResolver("/WEB-INF/jsp/", ".jsp");
+	@Override
+	public void configureViewResolvers(ViewResolverRegistry registry) {
+		registry.jsp("/WEB-INF/jsp/", ".jsp");
 	}
 
 	@Override
 	public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
-		configurer.favorParameter(true).ignoreAcceptHeader(false).defaultContentType(MediaType.APPLICATION_JSON)
+		configurer.favorParameter(true).ignoreAcceptHeader(true).defaultContentType(MediaType.APPLICATION_JSON)
 				.mediaType("xml", MediaType.APPLICATION_XML).mediaType("json", MediaType.APPLICATION_JSON);
 	}
 
-
-}
+} 

@@ -1,28 +1,25 @@
 package com.honsoft.web;
 
-import org.springframework.web.WebApplicationInitializer;
-import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
-import org.springframework.web.servlet.DispatcherServlet;
+import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import com.honsoft.web.config.WebConfig;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 
-//servlet api 3.0 이상에서 사용가능
-public class MyWebInitializer implements WebApplicationInitializer {
+public class MyWebInitializer extends AbstractAnnotationConfigDispatcherServletInitializer{
 
-    @Override
-    public void onStartup(ServletContext servletContext) throws ServletException {
-    	System.out.println("MyWebInitializer taken up.");
-        var ctx = new AnnotationConfigWebApplicationContext();
-        ctx.register(WebConfig.class);
-        ctx.setServletContext(servletContext);
+	@Override
+	protected Class<?>[] getRootConfigClasses() {
+		 return null;
+	}
 
-        System.out.println("MyWebInitializer before adding dispatcher");
-        var servlet = servletContext.addServlet("dispatcher", new DispatcherServlet(ctx));
-        servlet.setLoadOnStartup(1);
-        servlet.addMapping("/");
-        System.out.println("MyWebInitializer ended servletContext build");
-    }
+	@Override
+	protected Class<?>[] getServletConfigClasses() {
+		return new Class[] { WebConfig.class };
+	}
+
+	@Override
+	protected String[] getServletMappings() {
+		return new String[] { "/" };
+	}
+
 }
